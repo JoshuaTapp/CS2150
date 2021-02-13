@@ -1,3 +1,14 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 2/14/2021 14:00
+File Name: TestBankAccount.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 1 Postlab
+**/
+
 #include <iostream>
 #include <string>
 #include <stdlib.h>
