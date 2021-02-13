@@ -16,6 +16,17 @@ The code, images, and notes linked to from this page is what was discussed durin
 
 ### Lecture period content
 
+- Lecture 6: Fri, Feb 12 (c++ through slide 12.10)
+    - [stuff.cpp](lec06/stuff.cpp.html) ([raw code](lec06/stuff.cpp))
+    - [moreswap.cpp](lec06/moreswap.cpp.html) ([raw code](lec06/moreswap.cpp)) ([swap sketched image](lec05/swap.svg))
+    - [dangling.cpp](lec06/dangling.cpp.html) ([raw code](lec06/dangling.cpp)) ([dangling sketched image](lec06/dangling.svg))
+- Lecture 5: Wed, Feb 10 (c++ through slide 10.17)
+    - [swap sketched image](lec05/swap.svg)
+    - [notswap.cpp](lec05/notswap.cpp.html) ([raw code](lec05/notswap.cpp))
+    - [mistakes.cpp](lec05/mistakes.cpp.html) ([raw code](lec05/mistakes.cpp)) and the [mistakes sketched image](lec05/mistakes.svg)
+- Lecture 4: Mon, Feb 8 (c++ through slide 9.19)
+    - [pointers.cpp](lec04/pointers.cpp.html) ([raw code](lec04/pointers.cpp))
+    - [sketched image](lec04/lec04.svg)
 - Lecture 3: Fri, Feb 5 (c++ through slide 8.1)
     - [item.cpp](lec03/item.cpp.html) ([raw code](lec03/item.cpp))
     - [item.h](lec03/item.h.html) ([raw code](lec03/item.h))
