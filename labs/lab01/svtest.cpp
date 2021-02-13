@@ -1,9 +1,23 @@
+/**
+Date: 2/14/2021 13:00
+File Name: svtest.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 1 InLab
+Objective: 
+**/
+
+// This was part of the In-Lab, If you comment out '#include <iostream>', it will still compile.
+// I assume this is because it is included in 'svutil.h' and is imported when 'svtest.cpp' includes the header file
 #include <iostream>
 #include <string>
 
 // svutil is a library to support string-vectors, i.e. vector<string>
 #include "svutil.h"
 
+// If we comment out the namespace, it will still compile. This must mean that it is 
+// included by using #include 'svutil.h'
 using namespace std;
 
 // Exercise the svutil library by defining some vector<string> objects and
