@@ -75,6 +75,18 @@ int cmpMyObj(const MyObject o1, const MyObject o2) {
         return 1;
     }
 }
+/**
+Following the lab instructions, when we comment out the function getMAxMyObj().
+
+The function was called in line 38 of 'TestLifeCycle.cpp' and was not implemented. The Compiler error is as follows:
+
+(base) Joshuas-MacBook-Pro:lab01 tapp$ clang++ LifeCycle.cpp TestLifeCycle.cpp
+Undefined symbols for architecture x86_64:
+  "getMaxMyObj(MyObject, MyObject)", referenced from:
+      _main in TestLifeCycle-cdcd3e.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+**/
 
 MyObject getMaxMyObj(const MyObject o1, const MyObject o2) {
     string name1 = o1.getName(), name2 = o2.getName();
@@ -84,6 +96,7 @@ MyObject getMaxMyObj(const MyObject o1, const MyObject o2) {
         return o2;
     }
 }
+
 
 void swapMyObj(MyObject& o1, MyObject& o2) {
     MyObject tmp(o1);
