@@ -1,3 +1,16 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 2/14/2021 13:00
+File Name: TestLifeCycle.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 1 InLab
+Objective: 
+
+**/
+
 #include <iostream>
 #include <string>
 #include "LifeCycle.h"
