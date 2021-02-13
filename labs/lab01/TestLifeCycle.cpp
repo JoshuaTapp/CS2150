@@ -8,7 +8,6 @@ Course: UVA's CS2150 Programming and Data Representation
 
 Title: LAB 1 InLab
 Objective: 
-
 **/
 
 #include <iostream>
