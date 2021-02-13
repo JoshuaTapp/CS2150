@@ -1,3 +1,13 @@
+/**
+Date: 2/14/2021 13:00
+File Name: svutil.h
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 1 InLab
+Objective: 
+**/
+
 // utility functions for vectors of string
 
 #ifndef SVUTIL_H
