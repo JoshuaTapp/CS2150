@@ -6,21 +6,37 @@
 
 ListItr::ListItr() {}
 
-ListItr::ListItr(ListNode* theNode){}
+ListItr::ListItr(ListNode* theNode){
+    this->current = theNode;
+}
 
 bool ListItr::isPastEnd() const {
-    return true;
+    if(this->current->next == NULL && this->current->previous != NULL){
+        return true;
+    }
+    else return false;
 }
 
 bool ListItr::isPastBeginning() const {
-    return true;
+    if(this->current->previous == NULL && this->current->next != NULL){
+        return true;
+    }
+    else return false;
 }
-void ListItr::moveForward(){}
+void ListItr::moveForward(){
+    if( !( this->isPastEnd() ) ) {
+        this->current = this->current->next;
+    }
+}
 
-void ListItr::moveBackward(){}
+void ListItr::moveBackward(){
+    if( !( this->isPastBeginning() ) ) {
+        this->current = this->current->previous;
+    }
+}
 
 int ListItr::retrieve() const {
-    return 1;
+    return current->value;
 }
 
     
