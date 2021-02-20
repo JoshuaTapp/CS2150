@@ -1,5 +1,12 @@
-/*
- * Filename: List.h
+/**
+ *  Author: Joshua Tapp
+ *  CompID: jct7bm
+ *  Date: 2/20/2021 14:19
+ *  File Name: List.h
+
+ *  Course: UVA's CS2150 Programming and Data Representation
+ *
+ * Title: LAB 2
  * Description: List class definition
  * 	also includes the prototype for non-member function printList()
  */
