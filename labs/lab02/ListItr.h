@@ -1,7 +1,13 @@
-/*
- * Filename: ListItr.h
- * Description: ListItr class definition
- */
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 2/20/2021 14:19
+File Name: ListItr.h
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 2
+**/
 #ifndef LISTITR_H
 #define LISTITR_H
 
