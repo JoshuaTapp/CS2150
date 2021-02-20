@@ -1,7 +1,13 @@
-/*
- * Filename: ListNode.h
- * Description: ListNode class definition
- */
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 2/20/2021 14:19
+File Name: ListNode.h
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 2
+**/
 
 #ifndef LISTNODE_H
 #define LISTNODE_H
