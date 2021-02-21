@@ -61,7 +61,7 @@ List& List::operator=(const List& source) {
 }
 
 bool List::isEmpty() const {
-    if(count == 2) {return true;}
+    if(count == 0) {return true;}
     else {return false;}
 }
 
