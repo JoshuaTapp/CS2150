@@ -12,7 +12,7 @@
 #ifndef POSTFIXCALCULATOR_H
 #define POSTFIXCALCULATOR_H
 
-#include <stack>
+#include "stack.h"
 #include <string>
 #include <iostream>
 
@@ -26,7 +26,7 @@ public:
     void calculate(string str);
 
 private:
-    stack<int>* numStack; // this is for numbers
+    stack * numStack; // this is for numbers
 };
 
 bool checkOperation(const string str);
