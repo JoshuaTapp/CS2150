@@ -17,6 +17,5 @@ using namespace std;
 int main() {
 
    postfixCalculator calculator = postfixCalculator();
-   calculator.calculate();
 
 }
