@@ -16,32 +16,48 @@
  #include "postfixCalculator.h"
 
  postfixCalculator::postfixCalculator() {
-    this->stack1 = new stack<string>();
-    this->stack2 = new stack<string>();
+    this->numStack = new stack<int>();
     string token;
     while (cin >> token) {
-        if(checkInteger(token)) { 
-            this->stack1->push(token); // this is numbers only stack
+        if(!checkOperation(token)) {
+            this->numStack->push(stoi(token));
         }
-
         else {
-            this->stack2->push(token);
+            this->calculate(token);
         }
-
     }
-
+    cout << this->numStack->top() << endl;
  };
 
  postfixCalculator::~postfixCalculator() {
-    delete this->stack1;
-    delete this->stack2;
+    delete this->numStack;
  }
 
-void postfixCalculator::calculate() {
+void postfixCalculator::calculate(string str) {
+    char ch = str[0];
 
+    int b = this->numStack->top(); // right side
+    if (ch != '~') {
+        this->numStack->pop();  // if not negation, pop the top element for this next operation.
+    }
+
+    int a = this->numStack->top();
+    this->numStack->pop();
+
+    switch(ch) {
+        case('+') :
+            a += b;
+            break;
+        case('-') :
+            a -= b;
+            break;
+    }
+    this->numStack->push(a);
 }
 
 
-bool checkInteger(const string str){
-  return str.find_first_not_of( "-0123456789" ) == -1; // check if string is integer
+
+
+bool checkOperation(const string str){
+    return ( (str.find_first_not_of( "+-" ) == -1) && str.size() == 1) ? true : false; // check if string is integer
 }
