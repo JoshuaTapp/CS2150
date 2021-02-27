@@ -23,13 +23,11 @@ class postfixCalculator {
 public: 
     postfixCalculator();
     ~postfixCalculator();
-    void calculate();
+    void calculate(string str);
 
 private:
-    stack<string>* stack1; // this is for numbers
-    stack<string>* stack2; // this is for operators
-
+    stack<int>* numStack; // this is for numbers
 };
 
-bool checkInteger(const string str);
+bool checkOperation(const string str);
 #endif
