@@ -33,6 +33,7 @@
     delete this->numStack;
  }
 
+
 void postfixCalculator::calculate(string str) {
     char ch = str[0];
 
@@ -51,13 +52,19 @@ void postfixCalculator::calculate(string str) {
         case('-') :
             a -= b;
             break;
+        case('*') :
+            a *= b;
+            break;
+        case('/') :
+            a /= b;
+            break;
+        case('~') :
+            a *= -1;
+            break;
     }
     this->numStack->push(a);
 }
 
-
-
-
 bool checkOperation(const string str){
-    return ( (str.find_first_not_of( "+-" ) == -1) && str.size() == 1) ? true : false; // check if string is integer
+    return ( (str.find_first_not_of( "+-*/~" ) == -1) && str.size() == 1) ? true : false; // check if string is integer
 }
