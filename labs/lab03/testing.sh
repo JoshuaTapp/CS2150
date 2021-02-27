@@ -11,19 +11,24 @@ b=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/subtra
 c=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/multiplication.txt)
 d=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/division.txt)
 e=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/negation.txt)
-
-echo $a
-echo $b
-echo $c
-echo $d
-echo $e
-
+f=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/AddSub.txt)
+g=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/all4)
+h=$(./a.out < /Users/tapp/Documents/GitHub/CS2150/CS2150/labs/lab03/input/multDiv)
+echo "Actual, Expected"
+echo "addition: "$a ", 15"
+echo "subtraction: " $b ", 21"
+echo "multiplication: "$c ", 120"
+echo "division: " $d ", 42"
+echo  "negation: " $e ", 1"
+echo "addition / subtraction: " $f , "31"
+echo "all4: " $g ", -14"
+echo "mult/div" $h ", 112"
 #if [$a = 15]; then
  #   echo "Addition Passed"
 #fi
 
 #if ["$b" == "21"]; then
-    echo "Subtraction Passed"
+#    echo "Subtraction Passed"
 #fi
 
 #if ["$c" == "120"]; then
