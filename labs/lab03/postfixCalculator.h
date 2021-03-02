@@ -26,7 +26,7 @@ public:
     void calculate(string str);
 
 private:
-    stack * numStack; // this is for numbers
+    stack* numStack; // this is for numbers
 };
 
 bool checkOperation(const string str);

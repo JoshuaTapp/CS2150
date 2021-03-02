@@ -12,7 +12,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <list>
+#include "List.h"
 #include <iostream>
 using namespace std;
 
@@ -27,7 +27,7 @@ public:
     bool empty();
 
 private:
-    list<int>* List;
+    List* stackList;
 };
 
 #endif
