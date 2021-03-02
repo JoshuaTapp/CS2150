@@ -1,25 +1,25 @@
 #include "stack.h"
 
 stack::stack() {
-    this->List = new list<int>;
+    this->stackList = new List();
 };
 
 stack::~stack() {
-    delete this->List;
+    delete this->stackList;
 }
 
 void stack::push(int e) {
-    this->List->push_back(e);
+    this->stackList->push_back(e);
 }
 
 void stack::pop() {
-    if(!this->List->empty())  this->List->pop_back();
+    if(!this->stackList->empty())  this->stackList->pop_back();
 }
 
 int stack::top() {
-    return this->List->back();
+    return this->stackList->back();
 }
 
 bool stack::empty() {
-    return (this->List->empty()) ? true : false;
+    return (this->stackList->empty()) ? true : false;
 }
