@@ -4,3 +4,5 @@
 
 *.o
 *.out
+labs/lab04/helper.cpp
+labs/lab04/prelabTesting.sh
