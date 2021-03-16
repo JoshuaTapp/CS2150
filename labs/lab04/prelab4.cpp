@@ -1,3 +1,15 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/7/2021 13:00
+File Name: prelab4.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 4 PreLab
+Objective: Excercise on number representation in C++ on 64bit computer.
+
+**/
 #include <iostream>
 #include <cmath>
 #include <climits>
