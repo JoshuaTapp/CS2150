@@ -1,6 +1,14 @@
-// Insert your header information here
-// TreeNode.cpp:  Tree Node method implementations
-// CS 2150: Lab 5
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/20/2021 19:05
+File Name: TreeNode.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Prelab
+Objective: Implement postfix calculator with tree structure.
+**/
 
 #include "TreeNode.h"
 
