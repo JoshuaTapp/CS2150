@@ -1,7 +1,14 @@
-// Add your header information here
-// TreeCalc.h: Tree Calculator class definition
-// CS 2150: Lab 5
-// You must submit ALL code to make your project build correctly
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/20/2021 19:05
+File Name: TreeCalc.h
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Prelab
+Objective: Implement postfix calculator with tree structure.
+**/
 
 
 #ifndef TREECALC_H
