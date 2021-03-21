@@ -53,6 +53,13 @@ BinaryNode* BinarySearchTree::insert(BinaryNode*& n, const string& x) {
         return node;
     }
 }
+BinaryNode* BinarySearchTree::insert(BinaryNode*& n, const string& x) {
+    if (n == NULL) {
+        BinaryNode* node = new BinaryNode();
+        node->value = x;
+        return node;
+    }
+}
 
 // remove finds x's position in the tree and removes it.
 void BinarySearchTree::remove(const string& x) {
