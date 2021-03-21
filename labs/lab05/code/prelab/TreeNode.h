@@ -1,5 +1,14 @@
-// TreeNode.h: TreeNode class definition
-// CS 2150: Lab 5
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/20/2021 19:05
+File Name: TreeNode.h
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Prelab
+Objective: Implement postfix calculator with tree structure.
+**/
 
 
 #ifndef TREENODE_H
