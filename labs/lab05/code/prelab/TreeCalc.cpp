@@ -27,11 +27,25 @@ TreeCalc::~TreeCalc() {
 
 // Deletes tree/frees memory
 void TreeCalc::cleanTree(TreeNode* tree) {
-    if(tree->left != NULL && tree->right != NULL) {
+    if(tree->left == NULL && tree->right == NULL) {
+        delete tree; // if a leaf, delete the leaf. BASE CASE
+    }
+    // Delete left side child, then delete self(parent)
+    else if(tree->right == NULL && tree->left != NULL) { // Right side is empty, left has branch
+        this->cleanTree(tree->left);
+        delete tree;
+    }
+
+    // Delete right side child, then delete self(parent)
+    else if(tree->left == NULL && tree->right != NULL) { // Left side is empty, right has branch
+        this->cleanTree(tree->right);
+        delete tree;
+    }
+
+    else { // Deletes both of sides, then delete the parent node
         this->cleanTree(tree->left);
         this->cleanTree(tree->right);
-        delete tree->left;
-        delete tree->right;
+        delete tree;
     }
 
 }
@@ -82,7 +96,6 @@ void TreeCalc::insert(const string& val) {
 // Prints data in prefix form
 void TreeCalc::printPrefix(TreeNode* tree) const {
     // print the tree in prefix format
-    
     // same as prefix, but print leafs before root. (operand before operator)
     if(tree->left != NULL && tree->right != NULL) {
         cout << tree->value << " "; // operator
