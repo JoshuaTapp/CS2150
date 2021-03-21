@@ -41,6 +41,8 @@ private:
     // Declare a root node
     BinaryNode* root;
 
+    // private helper for inserting to allow recursion.
+    BinaryNode* insert(BinaryNode*& n, const string& x);
     // private helper for remove to allow recursion over different nodes. returns
     // a BinaryNode* that is assigned to the original node.
     BinaryNode* remove(BinaryNode*& n, const string& x);
