@@ -1,10 +1,10 @@
 CXX=clang++ $(CXXFLAGS)
-CXXFLAGS=-Wall # Enable all warnings
+CXXFLAGS=-Wall -O2
 DEBUG=-g
+OFILES=TreeCalc.o TreeCalcTest.o TreeNode.o
 
-prelab: TreeCalc.o TreeCalcTest.o TreeNode.o
-	$(CXX) $(DEBUG) TreeCalc.o TreeCalcTest.o TreeNode.o -o prelab
-	@echo "DONE!"
+a.out: $(OFILES)
+	$(CXX) $(DEBUG) $(OFILES) 
 
 TreeCalc.o: TreeCalc.cpp TreeCalc.h TreeNode.h
 
@@ -14,4 +14,4 @@ TreeNode.o: TreeNode.cpp TreeNode.h
 
 .PHONY: clean
 clean:
-	-rm -f *.o prelab
+	-rm -f *.o *- a.out
