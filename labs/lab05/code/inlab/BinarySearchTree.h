@@ -46,6 +46,11 @@ private:
     // private helper for remove to allow recursion over different nodes. returns
     // a BinaryNode* that is assigned to the original node.
     BinaryNode* remove(BinaryNode*& n, const string& x);
+    string pathTo(BinaryNode* const& n, const string& x) const;
+    bool find(BinaryNode* const& n, const string& x) const;
+    int numNodes(BinaryNode* const& n) const;
+
+
     // min finds the string with the smallest value in a subtree.
     string min(BinaryNode* node) const;
 
