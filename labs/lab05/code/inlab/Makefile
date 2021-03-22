@@ -1,5 +1,5 @@
 CXX=clang++ $(CXXFLAGS)
-CXXFLAGS=-Wall -O2 # Enable all warnings and Optimize
+CXXFLAGS=-Wall  # Enable all warnings and Optimize
 DEBUG=-g
 OFILES=BSTPathTest.o BinaryNode.o BinarySearchTree.o
 
