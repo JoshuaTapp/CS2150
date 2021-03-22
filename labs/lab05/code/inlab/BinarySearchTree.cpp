@@ -26,12 +26,10 @@ BinaryNode* BinarySearchTree::insert(BinaryNode*& n, const string& x) {
 
     else if(n->value < x) {
         n->right = insert(n->right, x);  // Traverse the right side of tree
-        return n;
     }
 
     else if(n->value > x) {
         n->left = insert(n->left, x);  // Traverse the left side of the tree
-        return n;
     }
     else{}
     return n; // return the tree/branch if we arnt creating new root.
