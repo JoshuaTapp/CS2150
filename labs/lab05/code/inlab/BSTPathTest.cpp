@@ -1,3 +1,14 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/21/2021 12:30
+File Name: BSTPathTest.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Inlab
+Objective: Implement Binary Search Tree that can search for a string.
+**/
 #include "BinarySearchTree.h"
 
 #include <iostream>
