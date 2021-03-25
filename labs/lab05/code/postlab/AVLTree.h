@@ -43,30 +43,44 @@ private:
     // Declare a root node
     AVLNode* root;
 
+    AVLNode* insert(AVLNode*& n, const string& x);
+
     // balance makes sure that the subtree with root n maintains the AVL tree
     // property, namely that the balance factor of n is either -1, 0, or 1.
     void balance(AVLNode*& n);
+
     // rotateLeft performs a single rotation on node n with its right child.
     AVLNode* rotateLeft(AVLNode*& n);
+    
     // rotateRight performs a single rotation on node n with its left child.
     AVLNode* rotateRight(AVLNode*& n);
 
     // private helper for remove to allow recursion over different nodes. returns
     // an AVLNode* that is assigned to the original node.
     AVLNode* remove(AVLNode*& n, const string& x);
+    
     // min finds the string with the smallest value in a subtree.
     string min(AVLNode* node) const;
+    
     // height returns the value of the height field in a node. If the node is
     // null, it returns -1.
     int height(AVLNode* node) const;
+    
+    int bf(AVLNode* node) const;
 
     // private helper for printTree to allow recursion over different nodes.
     void printTree(AVLNode* root, Trunk* prev, bool isRight);
 
     // Any other methods you need...
+    int numNodes(AVLNode* const& n) const;
+
+    bool find(AVLNode* const& n, const string& x) const;
+
+    string pathTo(AVLNode* const& n, const string& x) const;
 };
 
 // max returns the greater of two integers.
 int max(int a, int b);
+
 
 #endif
