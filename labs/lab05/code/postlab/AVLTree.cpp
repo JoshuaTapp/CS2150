@@ -1,3 +1,14 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/25/2021 11:20
+File Name: AVLTree.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Postlab
+Objective: Implement AVLTree that can search for a string and self balance.
+**/
 #include "AVLNode.h"
 #include "AVLTree.h"
 #include <iostream>
@@ -111,27 +122,31 @@ int AVLTree::numNodes(AVLNode* const& n) const {
 void AVLTree::balance(AVLNode*& n) {
     // calculate balance factor to determine if balancing is needed.
     int bf = height(n->right) - height(n->left); 
+
+    // LEFT SIDE 
     if (bf < -1) {
         // calculate left subtree's balance factor.
         int leftBF = height(n->left->right) - height(n->left->left);
+        // Left-Left side
         if (leftBF <= 0) {
-            
             n = rotateRight(n);
         } 
-            
+        // Left-Right side    
         else {
             n->left = rotateLeft(n->left);
             n = rotateRight(n);
         }
     }
 
+    // RIGHT SIDE
     else if (bf > 1) {
         // calculate right subtree's balance factor.
         int rightBF = height(n->right->right) - height(n->right->left);
+        // Right-Right side
         if (rightBF >= 0) {
             n = rotateLeft(n);
         } 
-        
+        // Right-Left side
         else {
             n->right = rotateRight(n->right);
             n = rotateLeft(n);
@@ -144,17 +159,18 @@ void AVLTree::balance(AVLNode*& n) {
 AVLNode* AVLTree::rotateLeft(AVLNode*& n) {
     //cout << "RotateLeft" << endl;
     //printTree();
-    AVLNode* parent = n->right;
-    n->right = parent->left;
-    parent->left = n;
-    n->height = 1 + max(height(n->left), height(n->right));
+    AVLNode* parent = n->right; // n's right child becomes new parent
+    n->right = parent->left; // change parent's left child to n's right child to maintain equality
+    parent->left = n; // update parents left child to n
+    n->height = 1 + max(height(n->left), height(n->right)); // update heights
     parent->height = 1 + max(height(parent->left), height(parent->right));
     //cout << "RotateRight Finished" << endl;
     //printTree();
-    return parent;
+    return parent; // return the new parent node. which was n->right originally
 }
 
 // rotateRight performs a single rotation on node n with its left child.
+// Same as rotateLeft but in opposite directions.
 AVLNode* AVLTree::rotateRight(AVLNode*& n) {
     //cout << "RotateRight" << endl;
     //printTree();
@@ -165,7 +181,6 @@ AVLNode* AVLTree::rotateRight(AVLNode*& n) {
     parent->height = 1 + max(height(parent->left), height(parent->right));
     //cout << "RotateRight Finished" << endl;
     //printTree();
-
     return parent;
 }
 
