@@ -11,11 +11,14 @@ int main() {
         cin >> word;
         if (instr == "I") {
             avl.insert(word);
+
         } else if (instr == "R") {
             avl.remove(word);
         } else if (instr == "L") {
             cout << "AVL path: " << avl.pathTo(word) << endl;
         }
     }
+    //cout << "Final Form:" << endl;
+   // avl.printTree();
     cout << "AVL numNodes: " << avl.numNodes() << endl;
 }
