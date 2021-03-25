@@ -1,3 +1,14 @@
+/**
+Author: Joshua Tapp
+CompID: jct7bm
+Date: 3/25/2021 11:20
+File Name: AVLPathTest.cpp
+
+Course: UVA's CS2150 Programming and Data Representation
+
+Title: LAB 5 Postlab
+Objective: Implement AVLTree that can search for a string and self balance.
+**/
 #include "AVLTree.h"
 
 #include <iostream>
