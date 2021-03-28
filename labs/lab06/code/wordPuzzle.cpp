@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
     }
     
     cout << words_found << " words found" << endl;
-    cout <<  (int)(stop_watch.getTime()*1000) << endl;
+    //cout <<  (int)(stop_watch.getTime()*1000) << endl;
     return 0;
 }
 
