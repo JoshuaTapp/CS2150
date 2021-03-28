@@ -25,11 +25,7 @@ int main(int argc, char* argv[]) {
     string dictionary_file_name = argv[1];
     string grid_file_name = argv[2];
     int rows, cols;
-    unordered_set<string>* dictionary = new unordered_set<string>();
-    string vec[25000];
-    int vec_index = 0;
-    timer vector_timer;
-    vector_timer.start();
+    hashTable* dictionary = new hashTable();
 
     if(readInGrid(grid_file_name, rows , cols)){
         fstream dictionary_file(dictionary_file_name, fstream::in);
@@ -37,24 +33,23 @@ int main(int argc, char* argv[]) {
         while(dictionary_file.good()) {
             getline(dictionary_file, input);
             if(input.length() > 2) {
+                //cout << input << endl;
                 dictionary->insert(input);
-                vec[vec_index] = input;
-                vec_index++;
-
             }
         }
     }
-    vector_timer.stop();
-    
-    
-           // Testing how <vector> will resize.
-           // Looks like it will just do push_back to save memory. 
-           // This means, ill just be using <vector> instead of resizing static arrays.
-    
-    //cout << vec.capacity() << " : " << vec.size() << " Time: " << vector_timer.getTime() << endl;
-    cout << " Time: " << vector_timer.getTime() << endl;
-    //vec.reserve(5000);
 
+    /**     
+    **  Ran test of insert valid words from words.txt into two DS that will be the bones of my hashtable    **
+    * Speed of vector vs static array
+    *   static array with 25k string size indexes. Time: 0.0054762s
+    *   vector<string> with no reserve. Time: 0.0064891s
+    *   vector<string> with 32k reserve Time: 0.00654765s
+    *       Conclusion: will be using vector<string> with reserve(table_size)
+    *       as DS for hashTable. compiler/ is doing such a good job of optimizing
+    *       the resizing, I see no need to go through the trouble of static array
+    *       implementation. I guess this is why we test vs. assuming theoretical results.
+    **/
     // cout << dictionary->size() << endl; // Got 24984 valid words in words.txt and 1525 valid words in words2.txt
 
     int words_found = 0;
@@ -110,8 +105,7 @@ int main(int argc, char* argv[]) {
     }
     cout << words_found << " words found" << endl;
     stop_watch.stop();
-    cout << "TIME: " << stop_watch.getTime() << endl;
-    
+    cout <<  (int)(stop_watch.getTime()*1000) << endl;
     return 0;
 }
 
