@@ -12,15 +12,18 @@ public:
     ~hashTable();
     bool count(const string &word);
     void insert(const string &word);
-private:
-    vector<string> table;
-    unsigned int table_size;
+    void print();
 
+private:
     unsigned int hashFunction(const string &word);
     bool checkprime(unsigned int p);
     unsigned int getNextPrime (unsigned int n);
     void resize();
-    double load_factor;
+    float load_factor;
+    int collisions;
+    int elements;
+    int table_size;
+    vector<string> table;
 };
 
 #endif
