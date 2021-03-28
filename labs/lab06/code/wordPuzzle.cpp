@@ -1,8 +1,6 @@
-#include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <unordered_set>
+#include <queue>
 #include "timer.h"
 #include "hashTable.h"
 
@@ -13,7 +11,7 @@ using namespace std;
 char grid[MAXROWS][MAXCOLS];
 bool readInGrid(string filename, int& rows, int& cols);
 string getWordInGrid(int startRow, int startCol, int dir, int len, int numRows, int numCols);
-
+vector<string> print_output;
 timer stop_watch;
 
 int main(int argc, char* argv[]) {
@@ -21,11 +19,14 @@ int main(int argc, char* argv[]) {
         cout << "error: not enough args" << endl;
         return 1;
     }
-    
+    ios_base::sync_with_stdio(false); // speeds up c++ iostream - https://www.geeksforgeeks.org/fast-io-for-competitive-programming/
+    cin.tie(NULL);
+
     string dictionary_file_name = argv[1];
     string grid_file_name = argv[2];
     int rows, cols;
     hashTable* dictionary = new hashTable();
+    int max_word_size_found = 0;
 
     if(readInGrid(grid_file_name, rows , cols)){
         fstream dictionary_file(dictionary_file_name, fstream::in);
@@ -33,7 +34,7 @@ int main(int argc, char* argv[]) {
         while(dictionary_file.good()) {
             getline(dictionary_file, input);
             if(input.length() > 2) {
-                //cout << input << endl;
+                if(input.length() > max_word_size_found) max_word_size_found = input.length();
                 dictionary->insert(input);
             }
         }
@@ -54,6 +55,9 @@ int main(int argc, char* argv[]) {
 
     int words_found = 0;
     string direction;
+    queue<string> output; // using queue DS to speed up output of text, because cout is slow.
+
+
     stop_watch.start();
 
     for(int current_row = 0; current_row < rows; current_row++) {
@@ -61,13 +65,11 @@ int main(int argc, char* argv[]) {
             for(int current_dir = 0; current_dir < 8; current_dir++) {
                 for(int word_length = 3; word_length < 23; word_length++) {
                     string current_word = getWordInGrid(current_row, current_col, current_dir, word_length, rows, cols);
-                    if(current_word.length() != word_length) break;
+                    if(current_word.length() != word_length || current_word.length() > max_word_size_found ) break; // saves time for the dictionaries that do not have 22 length words.
                     
                     if(dictionary->count(current_word) > 0) {
                         words_found++;
                         string found_word = getWordInGrid(current_row, current_col, current_dir, word_length, rows, cols);
-                        if(found_word == "") {}
-                        else {
                             // This switch statement was used from Aaron Bloomfield's getWordInGrid                        
                             // This will return the proper direction for the console output
                             switch (current_dir) { 
@@ -95,16 +97,30 @@ int main(int argc, char* argv[]) {
                                         case 7:
                                             direction = "NW";
                                             break; // north-west
-                                    }
-                            cout << direction << "(" << current_row << ", " << current_col << "): \t" <<  found_word << endl;
+                            }
+                            output.push(direction);
+                            output.push("(");
+                            output.push(to_string(current_row)); 
+                            output.push(", "); 
+                            output.push(to_string(current_col)); 
+                            output.push("): \t");
+                            output.push(found_word); 
+                            output.push("\n");
                         }
                     }
                 }
             }
         }
-    }
-    cout << words_found << " words found" << endl;
+    
     stop_watch.stop();
+    
+    // print out all the strings from queue.
+    while(!output.empty()) {
+        cout << output.front();
+        output.pop();
+    }
+    
+    cout << words_found << " words found" << endl;
     cout <<  (int)(stop_watch.getTime()*1000) << endl;
     return 0;
 }
