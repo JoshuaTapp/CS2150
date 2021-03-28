@@ -4,7 +4,7 @@
 using namespace std;
 
 hashTable::hashTable() {
-    table_size = getNextPrime(50000);
+    table_size = getNextPrime(5500);
     //cout << table_size;
     table.reserve(table_size);
     //cout << " capacity: " << table.capacity() << endl;
@@ -38,7 +38,7 @@ void hashTable::insert(const string &word) {
     // 5.  ? 
     unsigned int hash = hashFunction(word);
     //cout << hash << "\t value: " << table[hash] << endl;
-    
+    int quad_prob = 1;
     while(true) {
         if(table[hash] == "") {
             table[hash] = word; // found empty space, insert here.
@@ -57,7 +57,11 @@ void hashTable::insert(const string &word) {
         else {
             //collisions++;
             if(hash == (table_size -1)) hash = 0;
-            else hash++;
+            else {
+                //quad_prob *= quad_prob;
+                //hash+= quad_prob;
+                hash++;
+            }
         } 
         
     }
