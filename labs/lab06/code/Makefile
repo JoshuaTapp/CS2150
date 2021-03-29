@@ -10,7 +10,7 @@
 
 CXX=clang++ $(CXXFLAGS)
 CXXFLAGS=-O2 -Wall
-DEBUG=-g
+DEBUG=
 OFILES = wordPuzzle.o hashTable.o timer.o 
 
 a.out: $(OFILES)
