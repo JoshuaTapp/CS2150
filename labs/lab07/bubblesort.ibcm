@@ -1,0 +1,87 @@
+C009    000     -       jmp     start   skip the variables
+0000    001     i       dw      0       -
+0009    002     j       dw      9       -
+0000    003     temp    dw      -       -
+0001    004     one     dw      -       -
+406A    005     Rtest   dw      0x406A  used for testing loop conditions in LOOP
+000A    006     max     dw      10      -
+3000    007     down3   dw      -       -    
+1000    008     down1   dw      0x1000  used for pointer change
+1000    009     start   readH   -       start reading in the 10 elements
+4060    00A     arri    dw      -       writing inputs to array
+300A    00B     -       load    arri    -A[0] = 0x050 ... A[9] = 0x069
+5004    00C     -       add     one     -
+400A    00D     -       store   arri    -
+6005    00E     -       sub     Rtest   arr[i] - 406A
+E009    00F     -       jmpl    start    if ^ < 0, we still have stuff to get.
+3006    010     LOOP1   load    max     -
+6001    011     -       sub     i       -
+E04C    012     -       jmpl    LOOP3   ((max - i) <= 0) ? jump : continue
+D04C    013     -       jmpe    LOOP3   -
+3002    014     LOOP2   load    j       next 4 lines are the loop...
+6001    015     -       sub     i       ..control block for inner loop
+E038    016     -       jmpl    -       (j - i) <= 0
+D038    017     -       jmpe    -       -
+B000    018     IF      nop     -       -
+3069    019     a       dw      -       load A[j] -- dynamic
+6068    01A     b       dw      -       sub  A[j-1] -- dynamic
+E01D    01B     -       jmpl    true    A[j] - A[j-1] < 0 <==> A[j] < A[j-1]  
+C023    01C     -       jmp     false   -
+3069    01D     true    dw      -       load A[j] -- dynamic
+4003    01E     -       store   temp    temp = A[j]
+3068    01F     c       dw      -       load A[j-1] -- dynamic
+4069    020     d       dw      -       store: A[j] = A[j - 1] -- dynamic
+3003    021     -       load    temp    load temp (A[j])
+4068    022     e       dw      -       A[j - 1] = temp -- dynamic
+B000    023     false   nop     -       UPDATE POINTERS
+3019    024     -       load    a       -
+6004    025     -       sub     one     -
+4019    026     -       store   a       changed pointer 'a' to be '*a - 1'  
+401D    027     -       store   true    change pointer @true to same as 'a'  
+301A    028     -       load    b       -
+6004    029     -       sub     one     -
+401A    02A     -       store   b       changed pointer 'b' to be '*b - 1'
+6007    02B     -       sub     down3   this is the new 'b' - 0x3000
+401F    02C     -       store   c       c = 'b' - 0x3000
+3019    02D     -       load    a       -
+5008    02E     -       add     down1   -
+4020    02F     -       store   d       d = 'a' + 0x1000
+301F    030     -       load    c       -
+5008    031     -       add     down1   -  
+4022    032     -       store   e       e = 'c' + 0x1000
+B000    033     -       nop     -       j-- routine
+3002    034     -       load    j       -
+6004    035     -       sub     one     a:= j - 1
+4002    036     -       store   j       j-- complete
+C014    037     -       jmp     LOOP2   end of inner loop
+3005    038     -       load    Rtest   using 406A to reset the pointers
+6004    039     -       sub     one     a:= 4069
+4020    03A     -       store   d       d = 4069
+6004    03B     -       sub     one     a:= 4068
+4022    03C     -       store   e       e = 4068
+6008    03D     -       sub     down1   a:= 4068 - 0x1000
+401F    03E     -       store   c       c = 3068
+5004    03F     -       add     one     a:= 3068 + 0x1
+4019    040     -       store   a       a = 3069
+401D    041     -       store   true    true = 3069
+5007    042     -       add     down3   a:= 3069 + 0x3000
+6004    043     -       sub     one     a:= 6069 - 0x1
+401A    044     -       load    b       b = 6068
+3001    045     -       load    i       -
+5004    046     -       add     one     -   
+4001    047     -       store   i       i++
+3006    048     -       load    max     -
+6004    049     -       sub     one     a:= max - 1 = 10
+4002    04A     -       storage j       -
+C010    04B     -       jmp     LOOP1   end of outer loop
+3060    04C     LOOP3   dw      -       -
+1800    04D     -       writeH  -       -
+304C    04E     -       load    -       modify 04C to grab next array
+5004    04F     -       add     one     -  
+404C    050     -       store   -       -
+3002    051     -       load    j       -
+6004    052     -       sub     one     j--
+4002    053     -       store   j       -
+E056    054     -       jmpl    -       -         
+C04C    055     -       jmp     -       go back to printing
+0000    056     -       halt    -       -

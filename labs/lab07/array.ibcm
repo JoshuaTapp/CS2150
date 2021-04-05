@@ -1,0 +1,53 @@
+C00A    000     -       jmp     start   skip variables
+0000    001     i       dw      0       int i
+0000    002     n       dw      0       int n
+3040    003     rArr    dw      -       this will be used to load from array[i]
+4040    004     wArr    dw      -       same, but store to array[i]
+0001    005     one     dw      -       1
+0039    006     endArr  dw      -       this will be the memory value of the end.
+0000    007     zero    dw      -       -
+0000    008     -       nop     -       -  
+0000    009     -       nop     -       -
+1000    00A     start   readH   -       read value for 'n'
+4002    00B     -       store   n       -
+D034    00C     -       jmpe    end     -  
+D034    00D     -       jmpl    end     if we have invalid 'n', jump to end.
+3006    00E     -       load    endArr  -
+5002    00F     -       add     n       -
+6005    010     -       sub     one     -
+4006    011     -       store   endArr  endArr = array[0] + (n-1)
+1000    012     LOOP1   readH   -       -
+4040    013     wArr    dw      -       write array dynamic op.
+3013    014     -       load    -       -
+5005    015     -       add     one     write array[i++]
+4013    016     -       store   wArr    -
+3001    017     -       load    i       -
+5005    018     -       add     one     -
+4001    019     -       store   i       i = i + 1
+6002    01A     -       sub     n       a:= i - n (usually < 0)
+E012    01B     -       jmpl    LOOP1   jmp to 012 if (i - n < 0)
+3007    01C     -       load    zero    -
+4001    01D     -       store   i       i = 0 now.
+3040    01E     dyn     dw      -       read array dynamically , also called rArr when referencing its data.
+1800    01F     -       printH  -       print element at array[i]
+3001    020     -       load    i       -
+5005    021     -       add     one     -
+4001    022     -       store   i       i = i + 1
+6002    023     -       sub     n       a:= i - n (usually < 0)
+E027    024     -       jmpl    LOOP2   ^ < 0
+D01E    025     -       jmpe    dyn     if ^ = 0, print out the last one again.
+C02B    026     -       jmp     back    if this happens, we are printing backwards
+301E    027     LOOP2   load    dyn     now we go to the next index rArr[i++]
+5005    028     -       add     one     -
+401E    029     -       store   dyn     rArr = rArr + 1
+C01E    02A     -       jmp     dyn     go back and use this new instruction
+301E    02B     back    load    dyn     -
+6005    02C     -       sub     one     -
+401E    02D     -       store   dyn     -
+3001    02E     -       load    i       create test for i - 2n < 0. When this happens, we end program.
+6002    02F     -       sub     n       -
+B008    030     -       nop     -       typo
+6002    031     -       sub     n       -
+E01E    032     -       jmpl    dyn     -
+0000    033     -       nop     end     -
+0000    034     end     halt    -       everything after this (starting with mem[0040] is for array)

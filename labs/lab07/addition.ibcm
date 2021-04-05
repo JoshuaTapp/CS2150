@@ -1,0 +1,26 @@
+C005    000     -       jmp     LOOP   skip past the variables
+0000    001     a       dw      0       int a
+0000    002     b       dw      0       int b
+0000    003     c       dw      0       int c
+0000    004     sum     dw      0       int sum 
+1000    005     LOOP    readH   -       read the first element, accum = input
+4001    006     -       store   a       store first entry into 'a', a = accum
+4004    007     -       store   sum     store accum ('a' value) into sum.
+1000    008     -       readH   -       read value for 'b'
+4002    009     -       store   b       store the input into 'b'
+5004    00A     -       add     sum     sum + b
+4004    00B     -       store   sum     store new sum back into sum 
+1000    00C     -       readH   -       -
+4003    00D     -       store   c       -
+5004    00E     -       add     sum     sum + c
+4004    00F     -       store   sum     -
+1800    010     -       printH  -       print sum in all cases
+D013    011     -       jmpe    Loop2   jump if sum = 0 to end. break out of LOOP.
+C005    012     -       jmp     LOOP    lets try again
+3001    013     Loop2   load    a       load 'a' into accum
+1800    014     -       printH  -       print 'a'
+3002    015     -       load    b       load 'b'
+1800    016     -       printH  -       print 'b'
+3003    017     -       load    c       load 'c'
+1800    018     -       printH  -       print 'c'
+0000    019     HALT    halt    -       We halt.
