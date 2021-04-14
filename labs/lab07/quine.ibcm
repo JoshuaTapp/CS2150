@@ -1,10 +1,9 @@
 3000    000     start   load        -       - This loads the correct memory slot
 1800    001     -       writeH      -       - write a to console
-3000    002     -       load        start   - load 0x000 to update.
-5009    003     -       add         one     - a:= a+1
+3008    002     -       load        start   - load 0x000 to update.
+5000    003     -       add         one     - a:= a+1
 4000    004     -       store       start   - update 0x000 to next location
-6008    005     -       sub         size    - a:= mem[000]+1 - 300A
-D009    006     -       jmpl        one     - Jump to 009 if at end of it.
+6002    005     -       sub         size    - a:= mem[000]+1 - 300A
+D008    006     -       jmpe        one     - Jump to 009 if at end of it.
 C000    007     -       jmp         one     - if we jump here, we halt.
-300A    008     size    dw          -       - This is the size of the program. Used in op 005
-0001    009     one     dw          -       - Used for counting as well as Halt
+0001    008     one     dw          -       - Used for counting as well as Halt
