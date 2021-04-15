@@ -15,6 +15,6 @@ int main() {
     cin >> x;
     cout << "\nEnter integer 2: ";
     cin >> y;
-    cout << "\nProduct: " << product(x,y) << "\nPower: " << power(x,y) << endl;
+    cout << "\nProduct: " << product(x,y) << "\nPower: " << power(x,y) << "\n";
     return 0;
 }
