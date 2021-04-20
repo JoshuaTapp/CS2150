@@ -11,7 +11,7 @@ CXXFLAGS = -Wall -g
 AS = nasm
 
 # Defines the flags for the assembler
-ASFLAGS = -f macho64 -g
+ASFLAGS = -f elf64 -g
 
 # All of the .o files for our program
 OBJECTS = testBinarySearch.o binarySearch.o timer.o
