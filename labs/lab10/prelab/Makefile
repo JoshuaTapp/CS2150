@@ -11,13 +11,14 @@
 CXX=clang++ $(CXXFLAGS)
 CXXFLAGS=-O2 -Wall
 DEBUG=-g
-OFILES = heap.o huffmanenc.o
+OFILES = heap.o huffmanenc.o huffmanNode.o
 
 a.out: $(OFILES)
 	$(CXX) $(DEBUG) $(OFILES)
 
-heap.o: heap.cpp heap.h
+binary_heap.o: heap.cpp heap.h
 huffmanenc.o: huffmanenc.cpp
+huffmanNode.o: huffmanNode.cpp huffmanNode.h
 
 .PHONY: clean
 clean:

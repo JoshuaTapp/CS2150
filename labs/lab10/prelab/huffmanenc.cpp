@@ -1,7 +1,7 @@
 /**
 Author: Joshua Tapp
 CompID: jct7bm
-Date: 2/20/2021 14:19
+Date: 04/25/2021 13:00
 File Name: huffmanenc.cpp
 
 Course: UVA's CS2150 Programming and Data Representation
@@ -10,14 +10,19 @@ Title: LAB 10 prelab - Huffman Encoding
 Objective:  This file will read in a text file, construct a Huffman encoding, 
             encode said text file, and output the codebook, encoded file, and performance of encoding.
 
-Sources:
-            + fileio.cpp - https://uva-cs.github.io/pdr/labs/lab10/fileio.cpp.html
-            +
+Sources:    Code modified by Joshua Tapp
+            Original code written by Aaron Bloomfield, 2014
+            https://uva-cs.github.io/pdr/labs/lab10/fileio.cpp.html
 **/
 
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include "heap.h"
+
 
 using namespace std;
 
@@ -38,15 +43,60 @@ int main(int argc, char** argv) {
         exit(2);
     }
 
+    unordered_map<char, huffmanNode*> input;
+    unordered_map<char, huffmanNode*>::iterator itr;
+    unordered_map<char, string>::iterator itr2;
+    heap queue;
+    int count = 0;
+
     // read in characters one by one, until reading fails (we hit the end of the file)
     char g;
     while (file.get(g)) {
-        cout << g;
+        //  to do
+        //      create Huffman Tree for each element with height=1
+        //      build complete huffman tree
+        //      generate huffman code from tree
+        //cout << g;
+        if(g < 32 || g > 126){          // check if the char is valid, if not skip.
+            continue;
+        }
+        count++;
+        /*
+            This part is using the power of the map to quickly sort through duplicate values
+            and handle the frequency.
+        */
+        if(input.count(g) != 0) {
+            itr = input.find(g);
+            itr->second->increment();
+        }
+        else {
+            (input.insert(make_pair(g, new huffmanNode(g))));
+        }
     }
+
+
+    for (auto& x: input) { 
+        queue.insert(x.second);
+    }
+
+    while(queue.size() > 1) {
+        queue.huffmanTree();
+    }
+    
+    unordered_map<char, string>* codebook = new unordered_map<char, string>();
+    queue.findCode(queue.findMin(), codebook, "");
+    for (auto& x: *codebook) { 
+        if(x.first == ' ') {
+            cout << "space " << x.second << endl;
+        }
+        else { cout << x.first << " " << x.second << endl; }
+    }
+    
 
     // a nice pretty separator
     cout << "----------------------------------------" << endl;
 
+    
     // once we hit the end of the file we are marked as "failed", so clear that
     // then "seek" to the beginning of the file to start again
     file.clear(); // Clears the _state_ of the file, not its contents!
@@ -54,9 +104,35 @@ int main(int argc, char** argv) {
 
     // Read the file again, and print to the screen
     while (file.get(g)) {
-        cout << g;
+        // todo
+        //      encode the message
+            if(codebook->count(g) == 1) {
+                cout << codebook->at(g) << " ";
+            }
+        
     }
-
+    
+    cout << endl;
     // close the file
     file.close();
+    cout << "----------------------------------------" << endl;
+    int cfBits = 0;
+    double cr = 0.0;
+    double cost =0.0;
+    for (auto& x: *codebook) { 
+        int num = input.at(x.first)->getFrequency();
+        cfBits+= num*x.second.length();
+    }
+    cr = count*8;
+    cr /= cfBits;
+    cost = cfBits;
+    cost /= count;
+
+    cout << "There are a total of " << count << " symbols that are encoded." << endl;
+    cout << "There are " << codebook->size() << " distinct symbols used." << endl;
+    cout << "There were " << count*8 << " bits in the original file." << endl;
+    cout << "There were " << cfBits << " bits in the compressed file." << endl;
+    cout << "This gives a compression ratio of " << cr << endl;
+    cout << "The cost of the Huffman tree is " << cost <<" bits per character." << endl;
+
 }
