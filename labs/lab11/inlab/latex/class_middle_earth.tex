@@ -1,0 +1,137 @@
+\hypertarget{class_middle_earth}{}\doxysection{Middle\+Earth Class Reference}
+\label{class_middle_earth}\index{MiddleEarth@{MiddleEarth}}
+
+
+A graph of middle earth populated with a random selection of cities.  
+
+
+
+
+{\ttfamily \#include $<$middleearth.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_middle_earth_ad8fe036789b54f21f826fa0abdc06580}{Middle\+Earth}} (int xsize, int ysize, int num\+\_\+cities, int seed)
+\begin{DoxyCompactList}\small\item\em The middle earth object that contains a specific graph of cities. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_middle_earth_a5cb0956acbe5e39525e5061c9f3cc79b}{print}} ()
+\item 
+void \mbox{\hyperlink{class_middle_earth_ae724794944d0ade7854047e779eb7054}{print\+Table}} ()
+\item 
+float \mbox{\hyperlink{class_middle_earth_a23b3c1bc67569c0ad00aef88ed4ce863}{get\+Distance}} (const string \&city1, const string \&city2)
+\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_middle_earth_ad730d037c3946ec1129657fc5e0cb353}{get\+Itinerary}} (unsigned int length)
+\begin{DoxyCompactList}\small\item\em Creates a list of cities to visit in cyclic manner (roundtrip) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A graph of middle earth populated with a random selection of cities. 
+
+This class constructs a graph of middle earth based on user parameters. This graph will then select the requested nodes of the graph to be randomly populated with cities from all\+\_\+city\+\_\+names. The distances of each will also be selected randomly.
+
+\begin{DoxyAuthor}{Author}
+Aaron Bloomfield 
+
+Winston Liu 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2014-\/2021 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+(CC BY-\/\+SA 4.\+0) 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_middle_earth_ad8fe036789b54f21f826fa0abdc06580}\label{class_middle_earth_ad8fe036789b54f21f826fa0abdc06580}} 
+\index{MiddleEarth@{MiddleEarth}!MiddleEarth@{MiddleEarth}}
+\index{MiddleEarth@{MiddleEarth}!MiddleEarth@{MiddleEarth}}
+\doxysubsubsection{\texorpdfstring{MiddleEarth()}{MiddleEarth()}}
+{\footnotesize\ttfamily Middle\+Earth\+::\+Middle\+Earth (\begin{DoxyParamCaption}\item[{int}]{xsize,  }\item[{int}]{ysize,  }\item[{int}]{num\+\_\+cities,  }\item[{int}]{seed }\end{DoxyParamCaption})}
+
+
+
+The middle earth object that contains a specific graph of cities. 
+
+This object, inializes middle earth with a specific area based on the xsize and ysize. The middle earth object will also be populated with cities from array \+::all\+\_\+city\+\_\+names. The number of cities in each specific object depends on the parameter num\+\_\+cities. Each middle earth object will have a pseudorandomly chosen graph of cities determined from the \+::shuffle() function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em xsize} & the x-\/axis length of middle earth. \\
+\hline
+{\em ysize} & the y-\/axis length of middle earth \\
+\hline
+{\em num\+\_\+cities} & The number of cities to populate middle earth. \\
+\hline
+{\em seed} & This seed will be used in determining the location of cities on the graph.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+With respect to num\+\_\+cities\+: If input is greater than 40, the program will quit. If input is less than 5, the number of cities will be set to 5. 
+\end{DoxyWarning}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_middle_earth_a23b3c1bc67569c0ad00aef88ed4ce863}\label{class_middle_earth_a23b3c1bc67569c0ad00aef88ed4ce863}} 
+\index{MiddleEarth@{MiddleEarth}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!MiddleEarth@{MiddleEarth}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily float Middle\+Earth\+::get\+Distance (\begin{DoxyParamCaption}\item[{const string \&}]{city1,  }\item[{const string \&}]{city2 }\end{DoxyParamCaption})}
+
+This method returns the distance between the two passed-\/in cities. 
+\begin{DoxyParams}{Parameters}
+{\em city1} & \\
+\hline
+{\em city2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the distance between the two cities. This value is found by preforming a lookup in the hash table w.\+r.\+t. the parameters. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If we assume that the hash table (i.\+e. the map) is O(1), then this method call is also O(1). 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function assumes only valid parameters are used. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{class_middle_earth_ad730d037c3946ec1129657fc5e0cb353}\label{class_middle_earth_ad730d037c3946ec1129657fc5e0cb353}} 
+\index{MiddleEarth@{MiddleEarth}!getItinerary@{getItinerary}}
+\index{getItinerary@{getItinerary}!MiddleEarth@{MiddleEarth}}
+\doxysubsubsection{\texorpdfstring{getItinerary()}{getItinerary()}}
+{\footnotesize\ttfamily vector$<$ string $>$ Middle\+Earth\+::get\+Itinerary (\begin{DoxyParamCaption}\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Creates a list of cities to visit in cyclic manner (roundtrip) 
+
+This function will randomly pick a list of cities to visit from the list of cities in $<$middleearth\+::cities$>$.
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & The amount of cities to be visited. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of size \char`\"{}length\char`\"{} containing the cities chosen. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+shuffle() for the random implementation of how the itinerary is chosen. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_middle_earth_a5cb0956acbe5e39525e5061c9f3cc79b}\label{class_middle_earth_a5cb0956acbe5e39525e5061c9f3cc79b}} 
+\index{MiddleEarth@{MiddleEarth}!print@{print}}
+\index{print@{print}!MiddleEarth@{MiddleEarth}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Middle\+Earth\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Prints out the size of the \textquotesingle{}world\textquotesingle{} as well as for all cities \mbox{\Hypertarget{class_middle_earth_ae724794944d0ade7854047e779eb7054}\label{class_middle_earth_ae724794944d0ade7854047e779eb7054}} 
+\index{MiddleEarth@{MiddleEarth}!printTable@{printTable}}
+\index{printTable@{printTable}!MiddleEarth@{MiddleEarth}}
+\doxysubsubsection{\texorpdfstring{printTable()}{printTable()}}
+{\footnotesize\ttfamily void Middle\+Earth\+::print\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Prints a tab-\/separated table of the distances, which can be loaded into Excel or similar 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+middleearth.\+h\item 
+middleearth.\+cpp\end{DoxyCompactItemize}
