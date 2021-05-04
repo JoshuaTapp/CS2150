@@ -1,3 +1,19 @@
+/**
+    @brief A graph of middle earth populated with a random selection of cities.
+    
+    @details This class constructs a graph of middle earth based on user parameters. 
+    This graph will then select the requested nodes of the graph to be randomly
+    populated with cities from all_city_names. The distances of each will also be 
+    selected randomly.
+
+    @author Aaron Bloomfield
+    @author Winston Liu
+    @date 2014-2021
+    @copyright (CC BY-SA 4.0)
+
+
+*/
+
 #include "middleearth.h"
 
 #include <algorithm>
@@ -5,7 +21,17 @@
 #include <cstdlib>
 #include <cmath>
 
-// New shuffle method that uses the Mersenne Twister engine
+/** @brief New shuffle method that uses the Mersenne Twister engine
+    
+    This shuffle function will pseudorandomly shuffle the vector of strings according to the
+    Mersenne Twister pseudorandom number generator implemented in the C++ random library.
+
+    @return void
+    @param first Random access iterator at the beginning element of the desired sublist.
+    @param last  Random access iterator at the final desired element of the desired sublist.
+    @param g     The Mersenne-Twister seed.
+    @sa <a href="https://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine">std::mersenne_twister_engine</a> 
+*/
 void shuffle (vector<string>::iterator first, vector<string>::iterator last, mt19937& g) {
     for (auto i=(last-first)-1; i>0; --i) {
         unsigned int n = (g() / (double) g.max())*distance(first,last);
@@ -13,7 +39,9 @@ void shuffle (vector<string>::iterator first, vector<string>::iterator last, mt1
     }
 }
 
-// The list of all the place names that we'll be using
+/** @brief The list of all the cities in middle earth.
+    
+*/
 const array<string, 40> all_city_names{
     // human towns, cities and strongholds
     "Bree",             // a human and hobbit town between the Shire and Rivendell
@@ -64,7 +92,22 @@ const array<string, 40> all_city_names{
     "Dol Guldur",       // fortress in Mirkwood where Sauron, as the Necromancer, hid during most of the Hobbit
 };
 
-// Iluvatar, the creator of Middle-Earth
+/** @brief The middle earth object that contains a specific graph of cities.
+
+    This object, inializes middle earth with a specific area based on the xsize and ysize.
+    The middle earth object will also be populated with cities from array ::all_city_names. 
+    The number of cities in each specific object depends on the parameter num_cities.
+    Each middle earth object will have a pseudorandomly chosen graph of cities determined from the ::shuffle()
+    function.
+
+    @param xsize the x-axis length of middle earth. 
+    @param ysize the y-axis length of middle earth
+    @param num_cities The number of cities to populate middle earth. 
+    @param seed This seed will be used in determining the location of cities on the graph.
+
+    @warning With respect to num_cities: If input is greater than 40, the program will quit. If input is less than 5, the number of cities will be set to 5.
+
+ */
 MiddleEarth::MiddleEarth(int xsize, int ysize, int num_cities, int seed) {
     this->xsize = xsize;
     this->ysize = ysize;
@@ -87,7 +130,7 @@ MiddleEarth::MiddleEarth(int xsize, int ysize, int num_cities, int seed) {
     }
 
     // copy all the cities into a mutable vector
-    this->cities = vector<string>(all_city_names.begin(), all_city_names.end());
+    this->cities = vector<string>(all_city_names.begin(), all_city_names.end());  
 
     shuffle(cities.begin(), cities.end(), gen); // shuffle all the cities
     cities.erase(cities.begin() + num_cities, cities.end()); // then remove the ones we won't be using
@@ -110,6 +153,8 @@ MiddleEarth::MiddleEarth(int xsize, int ysize, int num_cities, int seed) {
 
 // The Mouth of Sauron!
 // Prints out info on the created 'world'
+/** Prints out the size of the 'world' as well as for all cities
+*/
 void MiddleEarth::print() {
     cout << "there are " << num_city_names
          << " locations to choose from; we are using " << cities.size() << endl;
@@ -120,8 +165,9 @@ void MiddleEarth::print() {
     }
 }
 
-// Prints a tab-separated table of the distances,
-// which can be loaded into Excel or similar
+/** Prints a tab-separated table of the distances,
+ which can be loaded into Excel or similar
+ */
 void MiddleEarth::printTable() {
     cout << "Table: " << endl << endl << "Location\txpos\typos\t";
     for (auto city : cities) {
@@ -138,12 +184,29 @@ void MiddleEarth::printTable() {
     }
 }
 
-// This method returns the distance between the two passed cities.
-// If we assume that the hash table (i.e. the map) is O(1),
-// then this method call is also O(1)
+/** This method returns the distance between the two passed-in cities.
+ @param city1 
+ @param city2
+ @return Returns the distance between the two cities. This value is found by preforming a lookup in the hash table w.r.t. the parameters. 
+ @note If we assume that the hash table (i.e. the map) is O(1), then this method call is also O(1).
+ @warning This function assumes only valid parameters are used.
+
+*/
 float MiddleEarth::getDistance(const string& city1, const string& city2) {
     return distances[city1][city2];
 }
+
+/** @brief Creates a list of cities to visit in cyclic manner (roundtrip)
+    
+    This function will randomly pick a list of cities to visit from 
+    the list of cities in <middleearth::cities>.
+
+    @param length The amount of cities to be visited.
+    @return A list of size "length" containing the cities chosen.
+    @sa shuffle() for the random implementation of how the itinerary is chosen.
+    
+
+*/
 
 // Returns the list of cities to travel to.
 // The first city is the original start point as well as the end point.

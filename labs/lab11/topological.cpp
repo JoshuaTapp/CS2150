@@ -13,7 +13,7 @@
 #include <string>
 #include <list>
 #include <vector>
-#include <stack>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
@@ -46,7 +46,6 @@ int main(int argc, char **argv) {
             break;
         }
         // This works. I have the file input working well with the fstream.
-        cout << a << " --- " << b << endl;
         if( !searchVector(graph, a) ) {
             vector<string> temp = {a};
             graph->push_back(temp);
@@ -61,16 +60,7 @@ int main(int argc, char **argv) {
         
     sort(graph->begin(), graph->end());
     int graphSize = graph->size();
-    cout << graphSize << endl;
     
-    for(auto& x:*graph) {
-        for(int i = 0; i < x.size(); i++){
-            cout << x[i] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-    cout << graphSize << endl;
 
     ifs.clear(); // Clears the _state_ of the file, not its contents!
     ifs.seekg(0);
@@ -84,21 +74,16 @@ int main(int argc, char **argv) {
             break;
         }
         // This works. I have the file input working well with the fstream.
-        cout << a << " --- " << b << endl;
         addNode(graph, a, b);
 
 
         //cout << it << endl;
     }
-    for(auto& x:*graph) {
-        for(int i = 0; i < x.size(); i++){
-            cout << x[i] << " ";
-        }
-        cout << endl;
-    }
+
 
     ifs.close();
     topoSort(graph);
+
 
 }
 
@@ -131,19 +116,55 @@ void addNode(vector<vector<string>> *graph, string a, string b) {
 
 void topoSort(vector<vector<string>> *graph) {
     vector<int> degree = getDegrees(graph);
+    queue<string> sorted;
+    while(true) {
+    cout << endl;
+        for(int i = 0; i < degree.size(); i++) {
+            if(degree[i] == 0) {
+                sorted.push(graph->at(i).at(0));
+                degree.at(i) = -1;
+                for( int n = 1; n < graph->at(i).size(); n++ ) {
+                    for (int s = 0; s < graph->size(); s++ ) {
+                        if( graph->at(s).at(0) == graph->at(i).at(n) ) {
+                            degree.at(s)--;
+                        }
+                    }
+                }
+            }
+        }
+        int count = 0;
+        for(auto x : degree) {
+            if(x == -1) count++;
+        }
 
+        if(count == degree.size()) break;
+    }
+    
+
+    while( !sorted.empty() ) {
+        cout << sorted.front() << " ";
+        sorted.pop();
+    }
+    cout << endl;
 }
+
 
 
 
 vector<int> getDegrees(vector<vector<string>> *graph) {
     vector<int> degree(graph->size(), 0); 
     
-    cout << endl;
-    for(int i : degree) {
-        cout << i << " ";
+    for(int i = 0; i < graph->size(); i++) {
+        vector<string> node = graph->at(i);
+        for(int j = 1; j < node.size(); j++) {
+            
+            for( int k = 1; k < graph->size(); k++) {
+                if( graph->at(k).at(0) == node[j] ) {
+                    degree[k]++;
+                }
+            }
+        }
     }
-    cout<< endl;
     return degree;
 }
 
